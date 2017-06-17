@@ -3,12 +3,12 @@ int simonCouleur[20], saisieCouleur[20];
 int level = 1, pinBuzzer = 10;
 
 void setup(){
-    for (int i = 0; i < 5; i++){
-        if (i < 4){
-            pinMode(pinBouton[i], INPUT_PULLUP);
-            pinMode(pinNiveau[i], OUTPUT);
+    for (int a = 0; a < 5; a++){
+        if (a < 4){
+            pinMode(pinBouton[a], INPUT_PULLUP);
+            pinMode(pinNiveau[a], OUTPUT);
         }
-        pinMode(pinLed[i], OUTPUT);
+        pinMode(pinLed[a], OUTPUT);
     }
     delay(1000);
     for (int i = 0; i < 5; i++){
