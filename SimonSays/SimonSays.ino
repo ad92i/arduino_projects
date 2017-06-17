@@ -17,6 +17,7 @@ void setup(){
     genSimon();
 }
 void loop(){
+    
     while (level < 20){
         for (int aff = 0; aff < level; aff++){
             afficheCouleur(simonCouleur[aff]);
