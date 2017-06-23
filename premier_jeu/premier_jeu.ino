@@ -1,17 +1,39 @@
 #include <LiquidCrystal.h>
+
+// Constantes
 #define NB_BOUTON 4
 #define NB_CHARJEU 6
 #define NB_CHARSENS 2
 #define NB_INTJEU 6
 
-char ligneJeu[NB_CHARJEU] = "", ligneSens[NB_CHARSENS] = "";
-int bouton[NB_BOUTON] =  {3, 4, 5, 12}, jeu[NB_INTJEU], secondes = 0;
-bool boutonRota = 0, boutonGauche, boutonAll, boutonDroit, win = 0;
+const int bouton[NB_BOUTON] =  {3, 4, 5, 12};
+const int secondes = 0;
+const bool boutonRota = 0;
+const bool win = 0;
+
+// Variables
+int jeu[NB_INTJEU];
+char ligneJeu[NB_CHARJEU] = "";
+char ligneSens[NB_CHARSENS] = "";
+bool boutonGauche;
+bool boutonAll;
+bool boutonDroit;
 LiquidCrystal ecran(11, 10, 9, 8, 7, 6);
 
+// Prototypes
+void affichageJeu(bool etat);
+void affichageDebut();
+void modifGauche(bool etat);
+void modifDroit(bool etat);
+void modifAll(bool etat);
+void randJeu(int * jeu);
+bool victoire(int * jeu);
+void vicMessage(int secondes);
+void horloge(int secondes);
+
+//Main
 void setup(){
     randomSeed(analogRead(0));
-    Serial.begin(9600);
     ecran.begin(16, 2);
     for (int i = 0; i < NB_BOUTON; i++){
         pinMode(bouton[i], INPUT_PULLUP);
@@ -52,6 +74,8 @@ void loop(){
     vicMessage(secondes);
     delay(100);
 }
+
+// Fonctions
 void affichageJeu(bool etat){
     ecran.clear(); 
     ecran.home();
@@ -78,12 +102,14 @@ void affichageJeu(bool etat){
         ecran.print(ligneSens);
     }
 }
+
 void affichageDebut(){
     ecran.home();
     ecran.write("Appuyer pour");
     ecran.setCursor(0, 1);
     ecran.write("commencer ...");
 }
+
 void modifGauche(bool etat){
     int buffer = jeu[0];
     if (etat) {
@@ -99,6 +125,7 @@ void modifGauche(bool etat){
         jeu[3] = buffer;
     }
 }
+
 void modifDroit(bool etat){
     int buffer = jeu[1];
     if (etat) {
@@ -114,6 +141,7 @@ void modifDroit(bool etat){
         jeu[4] = buffer;
     }
 }
+
 void modifAll(bool etat){
     int buffer = jeu[0];
     if (etat) {
@@ -133,6 +161,7 @@ void modifAll(bool etat){
         jeu[3] = buffer;
     }
 }
+
 void randJeu(int * jeu){
     int age, i, ran, compteur;
     for (age = 0; age < 6; age++){
@@ -151,6 +180,7 @@ void randJeu(int * jeu){
         }
     }
 }
+
 bool victoire(int * jeu){
     for (int k = 0; k < 6; k++){
         if (jeu[k] != k){
@@ -159,12 +189,14 @@ bool victoire(int * jeu){
     }
     return 1;
 }
+
 void vicMessage(int secondes){
     ecran.clear();
     ecran.home();
     ecran.write("Victoire !!");
     horloge(secondes);
 }
+
 void horloge(int secondes){
     char temps[16] = "";
     int minutes = secondes / 60, heures = minutes / 60;
