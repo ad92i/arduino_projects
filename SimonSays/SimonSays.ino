@@ -1,7 +1,23 @@
-int pinBouton[4] = {2, 6, 8, 11}, pinLed[5] = {3, 4, 7, 9, 12}, freqBuz[4] = {880, 659, 494, 741}, pinNiveau[4] = {0, 1, 5, 13};
-int simonCouleur[20], saisieCouleur[20];
-int level = 1, pinBuzzer = 10;
+// Constantes
+const int pinBouton[4] = {2, 6, 8, 11};
+const int pinLed[5] = {3, 4, 7, 9, 12};
+const int freqBuz[4] = {880, 659, 494, 741};
+const int pinNiveau[4] = {0, 1, 5, 13};
+const int level = 1;
+const int pinBuzzer = 10;
 
+// Tableaux
+int simonCouleur[20], saisieCouleur[20];
+
+// Prototypes
+void afficheCouleur(int couleur);
+void genSimon();
+int checkVictoire(int level);
+void initAffichage();
+void saisie(int lvl);
+void error();
+
+// Main 
 void setup(){
     for (int a = 0; a < 5; a++){
         if (a < 4){
@@ -32,6 +48,8 @@ void loop(){
     }
 
 }
+
+// Fonctions
 void afficheCouleur(int couleur){
     for (int i = 0; i < 5; i++){
         digitalWrite(pinLed[i], HIGH);
@@ -60,6 +78,7 @@ void afficheCouleur(int couleur){
     delay(500);
     noTone(pinBuzzer);
 }
+
 void genSimon(){
     int temp;
     randomSeed(analogRead(0));
@@ -72,14 +91,16 @@ void genSimon(){
         delay(20);
     }
 }
-int checkVictoire(int * saisie, int * simon, int level){
+
+int checkVictoire(int level){
     for (int i = 0; i < level; i++){
-        if (simon[i] != saisie[i]){
+        if (simonCouleur[i] != saisieCouleur[i]){
             return 0;
         }
     }
     return 1;
 }
+
 void initAffichage(){
     for (int i = 0; i < 5; i++){
         digitalWrite(pinLed[i], HIGH);
@@ -93,6 +114,7 @@ void initAffichage(){
         digitalWrite(pinLed[i], HIGH);
     }
 }
+
 void saisie(int lvl){
     saisieCouleur[20];
     int cmb = 0;
@@ -119,6 +141,7 @@ void saisie(int lvl){
         }
     }
 }
+
 void error(){
     for (int j = 0; j < 4; j++){
         tone(pinBuzzer, 5000);
@@ -136,12 +159,5 @@ void error(){
         noTone(pinBuzzer);
         delay(100);
     }
-    delay(600);
-
-
-
-
-
-
-    
+    delay(600);    
 }
