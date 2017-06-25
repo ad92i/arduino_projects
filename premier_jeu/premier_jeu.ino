@@ -7,14 +7,14 @@
 #define NB_INTJEU 6
 
 const int bouton[NB_BOUTON] =  {3, 4, 5, 12};
-const int secondes = 0;
-const bool boutonRota = 0;
-const bool win = 0;
 
 // Variables
 int jeu[NB_INTJEU];
+int secondes = 0;
 char ligneJeu[NB_CHARJEU] = "";
 char ligneSens[NB_CHARSENS] = "";
+bool win = 0;
+bool boutonRota = 0;
 bool boutonGauche;
 bool boutonAll;
 bool boutonDroit;
