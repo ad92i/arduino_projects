@@ -13,6 +13,7 @@ void loop() {
     etatBouton = digitalRead(pinBouton);
     if (!etatBouton){
         offAll();
+        
         affichage(random(10));
     }
 }
