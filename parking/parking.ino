@@ -29,7 +29,7 @@ if (reste == 9 || reste == 0) {
         reste--;
         offAll();
         affichage(reste);
-    }n
+    }
 }
 void offAll(){
     for (int i = 2; i < 9; i++){
